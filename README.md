@@ -1,4 +1,6 @@
-![banner](images/icon-background.png)
+<p align="center">
+  <img src="images/icon-background.png" alt="banner">
+</p>
 
 # Package Scripts Runner
 
@@ -11,10 +13,10 @@ This extension supports running scripts from the root level `package.json` file 
 ## Features
 
 - Running scripts with folder selection in a monorepo, `package.json` files in the root and subfolders
-![with Folders](images/withFolders.gif)
+![with Folders](images/withFolderDemo.gif)
 
 - Running scripts without folder selection, `package.json` files in the root and subfolders
-![without Folders](images/withoutFolders.gif)
+![without Folders](images/withoutFolderDemo.gif)
 
 - Accessing both commands through buttons in the upper right menu (`needs to be set in extension settings`)
 ![buttons](images/buttonSettings.gif)
@@ -23,10 +25,27 @@ This extension supports running scripts from the root level `package.json` file 
 
 This extension contributes the following settings:
 
-* `packageScriptsRunner.ignoredFolders`: Folders not to be scanned for `package.json` file.
-* `packageScriptsRunner.showRunnerWithFolders`: Show/hide button in upper right corner for running scripts with folder selection.
-* `packageScriptsRunner.showRunnerWithoutFolders`: Show/hide button in upper right corner for running scripts without folder selection.
-* `packageScriptsRunner.skipFolderSelection`: Automatically bypasses the folder selection menu when there is only one package.json detected in the workspace.
+- ### `packageScriptsRunner.ignoredFolders`
+  - Folders not to be scanned for package.json file.
+  - #### Default: [
+        "node_modules",
+        "dist",
+        "build",
+        ".git",
+        ".yarn",
+    ]
+
+- ### `packageScriptsRunner.showRunnerWithFolders`
+  - Show/hide button in upper right corner for running scripts with folder selection.
+  - #### Default: `false`
+
+- ### `packageScriptsRunner.showRunnerWithoutFolders`
+  - Show/hide button in upper right corner for running scripts without folder selection.
+  - #### Default: `false`
+
+- ### `packageScriptsRunner.skipFolderSelection`
+  - Automatically bypasses the folder selection menu when there is only one package.json detected in the workspace.
+  - #### Default: `false`
 
 ## Release Notes
 
