@@ -2,6 +2,7 @@
   "name": "package-scripts-runner",
   "displayName": "Package Scripts Runner",
   "description": "Extension that allows users to easily run scripts defined in the package.json files of their workspace folders, including subrepositories. It detects the package manager (npm, pnpm, or yarn) used in each folder and provides a quick pick menu to select a folder and a script to run.",
+  "publisher": "AdamAbrahaam",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.86.0"
@@ -30,6 +31,7 @@
     "configuration",
     "settings"
   ],
+  "icon": "images/icon-background.png",
   "activationEvents": [],
   "repository": {
     "type": "git",
