@@ -42,31 +42,75 @@
     "commands": [
       {
         "command": "package-scripts-runner.runWithFolders",
-        "title": "Package Scripts Runner: run with folders"
+        "title": "Package Scripts Runner: run with folders",
+        "icon": {
+					"light": "./images/icon-folder.png",
+					"dark": "./images/icon-folder.png"
+				}
       },
       {
         "command": "package-scripts-runner.runWithoutFolders",
-        "title": "Package Scripts Runner: run without folders"
+        "title": "Package Scripts Runner: run without folders",
+        "icon": {
+					"light": "./images/icon-white.png",
+					"dark": "./images/icon-white.png"
+				}
       }
     ],
-    "configuration": {
-      "title": "Ignored folders",
-      "properties": {
-        "PackageScriptsRunner.ignoredFolders": {
-          "type": "array",
-          "default": [
-            "node_modules",
-            "dist",
-            "build",
-            ".git",
-            ".yarn"
-          ],
-          "items": {
-            "type": "string"
+    "menus": {
+			"editor/title": [
+				{
+          "command": "package-scripts-runner.runWithFolders",
+					"group": "navigation",
+          "when": "config.PackageScriptsRunner.showRunnerWithFolders"
+				},
+        {
+          "command": "package-scripts-runner.runWithoutFolders",
+					"group": "navigation",
+          "when": "config.PackageScriptsRunner.showRunnerWithoutFolders"
+				}
+			]
+		},
+    "configuration": [
+      {
+        "title": "Ignored folders",
+        "properties": {
+          "PackageScriptsRunner.ignoredFolders": {
+            "type": "array",
+            "default": [
+              "node_modules",
+              "dist",
+              "build",
+              ".git",
+              ".yarn"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      {
+        "title": "Package Scripts Runner: run with folders",
+        "properties": {
+          "PackageScriptsRunner.showRunnerWithFolders": {
+            "type": "boolean",
+            "default": false,
+            "description": "Show the run icon with folders in the editor title context menu."
+          }
+        }
+      },
+      {
+        "title": "Package Scripts Runner: run without folders",
+        "properties": {
+          "PackageScriptsRunner.showRunnerWithoutFolders": {
+            "type": "boolean",
+            "default": false,
+            "description": "Show the run icon without folders in the editor title context menu."
           }
         }
       }
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
