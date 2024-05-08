@@ -47,13 +47,17 @@ async function getPackageJsonScriptsMap(rootName: string, rootUri: vscode.Uri) {
   const folders = [rootName, ...await getSubFolders(rootUri)];
 
   for (const folder of folders) {
-    const packageManager = await determinePackageManager(folder === rootName ? rootUri : vscode.Uri.joinPath(rootUri, folder));
     const packageJsonUri = vscode.Uri.joinPath(
       rootUri,
       folder === rootName ? 'package.json' : `${folder}/package.json`
     );
 
     const scripts = await getPackageJsonScripts(packageJsonUri);
+    if (!scripts.length) {
+      continue;
+    }
+
+    const packageManager = await determinePackageManager(folder === rootName ? rootUri : vscode.Uri.joinPath(rootUri, folder));
     packageJsonScriptsMap.set(folder, { scripts, packageManager });
   }
 
