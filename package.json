@@ -62,12 +62,12 @@
 				{
           "command": "package-scripts-runner.runWithFolders",
 					"group": "navigation",
-          "when": "config.PackageScriptsRunner.showRunnerWithFolders"
+          "when": "config.packageScriptsRunner.showRunnerWithFolders"
 				},
         {
           "command": "package-scripts-runner.runWithoutFolders",
 					"group": "navigation",
-          "when": "config.PackageScriptsRunner.showRunnerWithoutFolders"
+          "when": "config.packageScriptsRunner.showRunnerWithoutFolders"
 				}
 			]
 		},
@@ -75,7 +75,7 @@
       {
         "title": "Ignored folders",
         "properties": {
-          "PackageScriptsRunner.ignoredFolders": {
+          "packageScriptsRunner.ignoredFolders": {
             "type": "array",
             "default": [
               "node_modules",
@@ -93,7 +93,7 @@
       {
         "title": "Package Scripts Runner: run with folders",
         "properties": {
-          "PackageScriptsRunner.showRunnerWithFolders": {
+          "packageScriptsRunner.showRunnerWithFolders": {
             "type": "boolean",
             "default": false,
             "description": "Show the run icon with folders in the editor title context menu."
@@ -103,10 +103,20 @@
       {
         "title": "Package Scripts Runner: run without folders",
         "properties": {
-          "PackageScriptsRunner.showRunnerWithoutFolders": {
+          "packageScriptsRunner.showRunnerWithoutFolders": {
             "type": "boolean",
             "default": false,
             "description": "Show the run icon without folders in the editor title context menu."
+          }
+        }
+      },
+      {
+        "title": "Package Scripts Runner: skip folder selection for single package.json",
+        "properties": {
+          "packageScriptsRunner.skipFolderSelection": {
+            "type": "boolean",
+            "default": false,
+            "description": "Automatically bypasses the folder selection menu when there is only one package.json detected in the workspace."
           }
         }
       }

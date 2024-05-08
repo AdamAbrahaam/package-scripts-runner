@@ -1,5 +1,8 @@
 import * as vscode from 'vscode';
 
+const CONFIG_NAME = 'packageScriptsRunner';
+const CONFIG_IGNORED_FOLDERS = 'ignoredFolders';
+
 enum PackageManager {
   NPM = 'npm',
   PNPM = 'pnpm',
@@ -76,7 +79,7 @@ async function getPackageJsonScripts(packageJsonUri: vscode.Uri) {
 }
 
 async function getSubFolders(rootUri: vscode.Uri) {
-  const ignoredFolders = vscode.workspace.getConfiguration('PackageScriptsRunner').get<string[]>('ignoredFolders') || [];
+  const ignoredFolders = getConfig().get<string[]>(CONFIG_IGNORED_FOLDERS) || [];
   const allFiles = await vscode.workspace.fs.readDirectory(rootUri);
   return allFiles
     .filter(([name, type]) => type === vscode.FileType.Directory && !ignoredFolders.includes(name))
@@ -84,8 +87,11 @@ async function getSubFolders(rootUri: vscode.Uri) {
     .sort();
 }
 
-async function promptFolderSelection(packageJsonScriptsMap: PackageJsonScriptsMap, rootName: string) {
-  const scriptFolders = Array.from(packageJsonScriptsMap.keys());
+async function promptFolderSelection(scriptFolders: readonly string[], rootName: string, skipFolderSelection: boolean = false) {
+  if (skipFolderSelection && scriptFolders.length === 1) {
+    return { label: scriptFolders[0] ?? undefined };
+  }
+
   const scriptFoldersWithDescription = scriptFolders.map((folder) => ({
     label: folder,
     description: folder === rootName ? 'Root folder' : undefined,
@@ -145,12 +151,17 @@ async function fileExists(fileUri: vscode.Uri): Promise<boolean> {
   }
 }
 
+function getConfig() {
+  return vscode.workspace.getConfiguration(CONFIG_NAME);
+}
+
 export type { ParsedScript };
 export { 
   getWorkspaceDetails, 
   getWorkspaceFolder, 
   getPackageJsonScriptsMap, 
-  getFolderData, 
+  getFolderData,
+  getConfig,
   promptFolderSelection, 
   promptScriptSelection, 
   runScript
