@@ -1,0 +1,84 @@
+{
+  "name": "package-scripts-runner",
+  "displayName": "Package Scripts Runner",
+  "description": "Extension that allows users to easily run scripts defined in the package.json files of their workspace folders, including subrepositories. It detects the package manager (npm, pnpm, or yarn) used in each folder and provides a quick pick menu to select a folder and a script to run.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "package",
+    "package.json",
+    "package-scripts-runner",
+    "package-scripts",
+    "npm",
+    "pnpm",
+    "yarn",
+    "package-manager",
+    "package-manager-detection",
+    "monorepo",
+    "subrepositories",
+    "script",
+    "scripts",
+    "script-runner",
+    "terminal",
+    "quick-pick",
+    "pick-menu",
+    "configuration",
+    "settings"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "package-scripts-runner.runWithFolders",
+        "title": "Package Scripts Runner: run with folders"
+      },
+      {
+        "command": "package-scripts-runner.runWithoutFolders",
+        "title": "Package Scripts Runner: run without folders"
+      }
+    ],
+    "configuration": {
+      "title": "Ignored folders",
+      "properties": {
+        "PackageScriptsRunner.ignoredFolders": {
+          "type": "array",
+          "default": [
+            "node_modules",
+            "dist",
+            "build",
+            ".git",
+            ".yarn"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.89.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9"
+  }
+}
